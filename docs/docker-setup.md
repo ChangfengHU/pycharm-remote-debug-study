@@ -14,6 +14,11 @@
 docker build -t py-demo-project:dev .
 ```
 
+也可以用 Makefile：
+```bash
+make build
+```
+
 ## 运行容器（推荐命令）
 容器会在第一次请求时自动附加到宿主机的 PyCharm：
 ```bash
@@ -28,6 +33,19 @@ docker run -d --name py-demo-web \
   py-demo-project:dev
 ```
 
+使用 docker compose 一键启动（端口与环境变量见 compose.yaml）：
+```bash
+docker compose up -d web
+```
+
+或通过 Makefile：
+```bash
+make up        # 或 make up-build 首次构建并启动
+make logs      # 查看日志
+make ps        # 查看服务状态
+make down      # 停止并清理
+```
+
 说明：
 - `host.docker.internal` 在 macOS/Windows 上默认可用；在 Linux 上通过 `--add-host host.docker.internal:host-gateway` 映射到宿主机。
 - IDE 监听端口为 5454，Web 服务对外映射 5455。
@@ -40,6 +58,12 @@ curl http://127.0.0.1:5455/debug
 - 或直接访问任意接口（如果启用了 `AUTO_ATTACH_ON_REQUEST=1`）：
 ```bash
 curl http://127.0.0.1:5455/fib/12
+```
+
+也可用 Makefile 快捷命令：
+```bash
+make curl-debug
+make curl-fib N=12
 ```
 
 ## 常见问题

@@ -1,0 +1,18 @@
+services:
+  web:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    ports:
+      - "5455:5455"
+    environment:
+      # Tell app to auto attach on first request
+      - AUTO_ATTACH_ON_REQUEST=1
+      # Point to host's PyCharm debug server at 5454
+      - PYCHARM_REMOTE=1
+      - PYCHARM_REMOTE_HOST=host.docker.internal
+      - PYCHARM_REMOTE_PORT=5454
+      - FLASK_ENV=development
+    # On Linux, host.docker.internal may require extra host mapping
+    extra_hosts:
+      - "host.docker.internal:host-gateway"

@@ -4,7 +4,7 @@ version = "0.1.0"
 requires-python = ">=3.9"
 dependencies = [
   "flask>=3.0.0",
-  "pydevd-pycharm>=252",
+  "pydevd-pycharm>=241.18034.82",
 ]
 
 ## uv settings omitted for compatibility with installed uv version

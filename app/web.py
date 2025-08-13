@@ -16,7 +16,7 @@ def maybe_connect_debugger() -> dict:
     if pydevd_pycharm is None:
         return {"connected": False, "reason": "pydevd_pycharm not installed"}
 
-    host = os.getenv("PYCHARM_REMOTE_HOST", "127.0.0.1")
+    host = os.getenv("PYCHARM_REMOTE_HOST", "192.168.10.106")
     port_str = os.getenv("PYCHARM_REMOTE_PORT", "5454")
     try:
         port = int(port_str)

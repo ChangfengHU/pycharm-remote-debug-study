@@ -24,23 +24,32 @@ def maybe_connect_debugger() -> dict:
         port = 5454
 
     try:
-        # Prefer snake_case for new versions
-        pydevd_pycharm.settrace(
-            host=host,
-            port=port,
-            stdout_to_server=True,
-            stderr_to_server=True,
-            suspend=False,
-        )
-    except TypeError:
-        # Fallback to camelCase for older versions
-        pydevd_pycharm.settrace(
-            host=host,
-            port=port,
-            stdoutToServer=True,
-            stderrToServer=True,
-            suspend=False,
-        )
+        try:
+            # Prefer snake_case for new versions
+            pydevd_pycharm.settrace(
+                host=host,
+                port=port,
+                stdout_to_server=True,
+                stderr_to_server=True,
+                suspend=False,
+            )
+        except TypeError:
+            # Fallback to camelCase for older versions
+            pydevd_pycharm.settrace(
+                host=host,
+                port=port,
+                stdoutToServer=True,
+                stderrToServer=True,
+                suspend=False,
+            )
+    except Exception as e:
+        return {
+            "connected": False,
+            "host": host,
+            "port": port,
+            "error": str(e),
+            "exc_type": e.__class__.__name__,
+        }
 
     return {"connected": True, "host": host, "port": port}
 

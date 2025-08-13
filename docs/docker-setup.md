@@ -33,12 +33,12 @@ docker run -d --name py-demo-web \
   py-demo-project:dev
 ```
 
-使用 docker compose 一键启动（端口与环境变量见 compose.yaml）：
+使用 docker compose 一键启动（环境变量可在项目根目录 `.env` 覆盖，详见 `compose.yaml`）：
 ```bash
 docker compose up -d web
 ```
 
-或通过 Makefile：
+或通过 Makefile（内部即调用 docker compose）：
 ```bash
 make up        # 或 make up-build 首次构建并启动
 make logs      # 查看日志
